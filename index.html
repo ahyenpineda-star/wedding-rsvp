@@ -64,6 +64,75 @@
       margin: 20px auto;
     }
 
+    .gallery {
+      width: 100%;
+      max-width: 900px;
+      padding: 0 20px 60px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+      background: #e3ece0;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-item.wide {
+      grid-column: span 2;
+    }
+
+    .gallery-item.tall {
+      grid-row: span 2;
+    }
+
+    .gallery-item.tall img {
+      height: 616px;
+    }
+
+    .gallery-item.wide img {
+      height: 280px;
+    }
+
+    @media (max-width: 640px) {
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .gallery-item.wide,
+      .gallery-item.tall {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+      .gallery-item img,
+      .gallery-item.wide img,
+      .gallery-item.tall img {
+        height: 240px;
+      }
+    }
+
     .container {
       width: 100%;
       max-width: 600px;
@@ -270,6 +339,21 @@
   <div class="divider"></div>
   <div class="tagline">Join us as we say &ldquo;I do&rdquo;</div>
 </section>
+
+<div class="gallery">
+  <div class="gallery-item tall">
+    <img src="pics/1.jpg" alt="Mary & Mel" loading="lazy">
+  </div>
+  <div class="gallery-item">
+    <img src="pics/2.jpg" alt="Mary & Mel" loading="lazy">
+  </div>
+  <div class="gallery-item">
+    <img src="pics/3.jpg" alt="Mary & Mel" loading="lazy">
+  </div>
+  <div class="gallery-item wide">
+    <img src="pics/4.jpg" alt="Mary & Mel" loading="lazy">
+  </div>
+</div>
 
 <div class="container">
 
