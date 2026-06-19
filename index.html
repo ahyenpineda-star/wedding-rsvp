@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mary & Mel | RSVP</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: #faf7f2;
+      color: #2c2c2c;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero {
+      width: 100%;
+      padding: 80px 20px 40px;
+      text-align: center;
+      background: linear-gradient(180deg, #faf7f2 0%, #f5efe6 100%);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 400;
+      letter-spacing: 2px;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+
+    .hero .ampersand {
+      font-style: italic;
+      color: #b8864d;
+    }
+
+    .hero .date {
+      font-size: 1.1rem;
+      color: #6b6b6b;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 8px;
+    }
+
+    .hero .tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: #b8864d;
+      margin-top: 12px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: #d4c5b2;
+      margin: 20px auto;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      padding: 0 20px 80px;
+    }
+
+    form {
+      background: #fff;
+      padding: 48px 40px;
+      border-radius: 4px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+    }
+
+    .form-group {
+      margin-bottom: 28px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #8a7a6a;
+      margin-bottom: 8px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #e0d6ca;
+      border-radius: 2px;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: #2c2c2c;
+      background: #fefcf9;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: #b8864d;
+    }
+
+    input::placeholder {
+      color: #c5b8a8;
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 24px;
+      margin-top: 4px;
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      font-weight: 300;
+      text-transform: none;
+      letter-spacing: normal;
+      color: #2c2c2c;
+      cursor: pointer;
+    }
+
+    .radio-group input[type="radio"] {
+      width: auto;
+      accent-color: #b8864d;
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b8864d' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+    }
+
+    .guest-entry {
+      background: #faf7f2;
+      padding: 20px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+
+    .guest-entry .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .guest-entry label {
+      font-size: 0.8rem;
+    }
+
+    .add-guest-btn {
+      background: none;
+      border: 1px dashed #d4c5b2;
+      padding: 10px 20px;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #8a7a6a;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .add-guest-btn:hover {
+      border-color: #b8864d;
+      color: #b8864d;
+    }
+
+    .remove-guest {
+      background: none;
+      border: none;
+      color: #c5b8a8;
+      cursor: pointer;
+      font-size: 0.8rem;
+      text-decoration: underline;
+      padding: 0;
+      margin-top: 8px;
+    }
+
+    .remove-guest:hover {
+      color: #b8864d;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: #b8864d;
+      color: #fff;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 12px;
+    }
+
+    .submit-btn:hover {
+      background: #a0733e;
+    }
+
+    .success {
+      text-align: center;
+      padding: 48px 40px;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+    }
+
+    .success h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 400;
+      color: #1a1a1a;
+      margin-bottom: 12px;
+    }
+
+    .success p {
+      color: #6b6b6b;
+      line-height: 1.8;
+    }
+
+    .success.hidden, form.hidden, .add-guest-entry.hidden {
+      display: none;
+    }
+
+    .error-msg {
+      color: #c0392b;
+      font-size: 0.85rem;
+      margin-top: 4px;
+      display: none;
+    }
+
+    .error-msg.visible {
+      display: block;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #c5b8a8;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.5rem; }
+      form { padding: 32px 20px; }
+      .radio-group { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <h1>Mary <span class="ampersand">&</span> Mel</h1>
+  <div class="date">September 26, 2026</div>
+  <div class="divider"></div>
+  <div class="tagline">Join us as we say &ldquo;I do&rdquo;</div>
+</section>
+
+<div class="container">
+
+  <form id="rsvpForm">
+    <div class="form-group">
+      <label>Will you be attending?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="attending" value="yes" required> Joyfully Accept</label>
+        <label><input type="radio" name="attending" value="no"> Regretfully Decline</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email address</label>
+      <input type="email" id="email" name="email" placeholder="your@email.com" required>
+    </div>
+
+    <div class="form-group">
+      <label>Your name</label>
+      <input type="text" id="name" name="name" placeholder="First and last name" required>
+    </div>
+
+    <div id="guestContainer">
+      <div class="guest-entry" data-index="0">
+        <div class="form-group">
+          <label>Guest name</label>
+          <input type="text" name="guest_name_0" placeholder="First and last name" class="guest-name">
+        </div>
+        <div class="form-group">
+          <label>Meal preference</label>
+          <select name="guest_meal_0" class="guest-meal">
+            <option value="chicken">Chicken</option>
+            <option value="fish">Fish</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="kids">Kids meal</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="add-guest-btn" id="addGuestBtn">+ Add another guest</button>
+
+    <div class="form-group" style="margin-top:24px">
+      <label for="message">Message for the couple (optional)</label>
+      <input type="text" id="message" name="message" placeholder="Write a note...">
+    </div>
+
+    <div class="error-msg" id="formError">Please fill in all required fields.</div>
+
+    <button type="submit" class="submit-btn">Send RSVP</button>
+  </form>
+
+  <div class="success hidden" id="successMessage">
+    <h2>Thank you!</h2>
+    <p>Your response has been received.<br>
+    We can&rsquo;t wait to celebrate with you.</p>
+    <div class="divider" style="margin: 24px auto;"></div>
+    <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; color: #b8864d;">
+      Mary &amp; Mel
+    </p>
+  </div>
+
+</div>
+
+<div class="footer">Made with love &mdash; September 26, 2026</div>
+
+<script>
+  let guestCount = 1;
+
+  document.getElementById('addGuestBtn').addEventListener('click', () => {
+    const container = document.getElementById('guestContainer');
+    const div = document.createElement('div');
+    div.className = 'guest-entry';
+    div.dataset.index = guestCount;
+    div.innerHTML = `
+      <div class="form-group">
+        <label>Guest name</label>
+        <input type="text" name="guest_name_${guestCount}" placeholder="First and last name" class="guest-name">
+      </div>
+      <div class="form-group">
+        <label>Meal preference</label>
+        <select name="guest_meal_${guestCount}" class="guest-meal">
+          <option value="chicken">Chicken</option>
+          <option value="fish">Fish</option>
+          <option value="vegetarian">Vegetarian</option>
+          <option value="kids">Kids meal</option>
+        </select>
+      </div>
+      <button type="button" class="remove-guest" onclick="this.closest('.guest-entry').remove()">Remove</button>
+    `;
+    container.appendChild(div);
+    guestCount++;
+  });
+
+  document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const attending = document.querySelector('input[name="attending"]:checked');
+    const email = document.getElementById('email').value.trim();
+    const name = document.getElementById('name').value.trim();
+
+    if (!attending || !email || !name) {
+      document.getElementById('formError').classList.add('visible');
+      return;
+    }
+    document.getElementById('formError').classList.remove('visible');
+
+    const guests = [];
+    document.querySelectorAll('.guest-entry').forEach(el => {
+      const gName = el.querySelector('.guest-name').value.trim();
+      const gMeal = el.querySelector('.guest-meal').value;
+      if (gName) guests.push({ name: gName, meal: gMeal });
+    });
+
+    const payload = {
+      attending: attending.value,
+      email,
+      name,
+      guests,
+      message: document.getElementById('message').value.trim()
+    };
+
+    console.log('RSVP submitted:', payload);
+
+    document.getElementById('rsvpForm').classList.add('hidden');
+    document.getElementById('successMessage').classList.remove('hidden');
+
+    if (typeof fetch === 'function') {
+      fetch('https://formspree.io/f/your-form-id', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(() => {});
+    }
+  });
+</script>
+
+</body>
+</html>
