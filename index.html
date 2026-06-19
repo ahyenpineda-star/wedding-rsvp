@@ -152,7 +152,6 @@
       bottom: -60px;
       left: 5%;
       animation-delay: 0.3s;
-      transform: rotate(-4deg);
       box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
 
@@ -162,7 +161,6 @@
       bottom: -30px;
       right: 8%;
       animation-delay: 0.6s;
-      transform: rotate(3deg);
       box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
 
@@ -178,12 +176,9 @@
     }
 
     @keyframes floatIn {
-      0% { opacity: 0; transform: translateY(20px) rotate(var(--rot, 0deg)); }
-      100% { opacity: 1; transform: translateY(0) rotate(var(--rot, 0deg)); }
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
-
-    .floating-photo:nth-child(5) { --rot: -4deg; }
-    .floating-photo:nth-child(6) { --rot: 3deg; }
 
     .form-wrapper {
       width: 100%;
@@ -232,7 +227,6 @@
       height: 260px;
       top: 0;
       left: 0;
-      transform: rotate(-3deg);
       z-index: 2;
     }
 
@@ -241,25 +235,20 @@
       height: 210px;
       top: 140px;
       left: 80px;
-      transform: rotate(5deg);
       z-index: 1;
     }
 
     .form-side:last-child .side-photo:nth-child(1) {
       left: auto;
       right: 0;
-      transform: rotate(3deg);
     }
 
     .form-side:last-child .side-photo:nth-child(2) {
       left: auto;
       right: 80px;
-      transform: rotate(-5deg);
     }
 
     .form-side .side-photo:hover {
-      transform: rotate(0deg) scale(1.05);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
       z-index: 5;
     }
 
@@ -559,10 +548,10 @@
   </div>
   <div class="hero-overlay"></div>
 
-  <div class="floating-photo">
+  <div class="floating-photo" data-base="rotate(-4deg)">
     <img src="pics/3.jpg" alt="">
   </div>
-  <div class="floating-photo">
+  <div class="floating-photo" data-base="rotate(3deg)">
     <img src="pics/1.jpg" alt="">
   </div>
 
@@ -581,8 +570,8 @@
 <div class="form-wrapper">
 
   <div class="form-side">
-    <div class="side-photo"><img src="pics/2.jpg" alt="" loading="lazy"></div>
-    <div class="side-photo"><img src="pics/4.jpg" alt="" loading="lazy"></div>
+    <div class="side-photo" data-base="rotate(-3deg)"><img src="pics/2.jpg" alt="" loading="lazy"></div>
+    <div class="side-photo" data-base="rotate(5deg)"><img src="pics/4.jpg" alt="" loading="lazy"></div>
   </div>
 
   <div class="container">
@@ -649,8 +638,8 @@
   </div>
 
   <div class="form-side">
-    <div class="side-photo"><img src="pics/3.jpg" alt="" loading="lazy"></div>
-    <div class="side-photo"><img src="pics/1.jpg" alt="" loading="lazy"></div>
+    <div class="side-photo" data-base="rotate(3deg)"><img src="pics/3.jpg" alt="" loading="lazy"></div>
+    <div class="side-photo" data-base="rotate(-5deg)"><img src="pics/1.jpg" alt="" loading="lazy"></div>
   </div>
 
 </div>
@@ -737,7 +726,64 @@
 
   music.volume = 0.4;
 
+  let ctx, analyser, src, dataArray;
+  const heroImgs = document.querySelectorAll('.hero-bg img');
+  const floatPhotos = document.querySelectorAll('.floating-photo');
+  const sidePhotos = document.querySelectorAll('.side-photo');
+  const titleBg = document.querySelector('.title-bg');
+
+  function initAudio() {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    analyser = ctx.createAnalyser();
+    analyser.fftSize = 256;
+    src = ctx.createMediaElementSource(music);
+    src.connect(analyser);
+    analyser.connect(ctx.destination);
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
+    animate();
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    if (!analyser) return;
+    analyser.getByteFrequencyData(dataArray);
+    const bass = dataArray.slice(0, 8).reduce((a, b) => a + b, 0) / 8 / 255;
+    const mid = dataArray.slice(8, 24).reduce((a, b) => a + b, 0) / 16 / 255;
+    const high = dataArray.slice(24, 48).reduce((a, b) => a + b, 0) / 24 / 255;
+    const avg = (bass + mid + high) / 3;
+
+    heroImgs.forEach((img, i) => {
+      const s = 1 + bass * 0.04 * (i % 2 === 0 ? 1 : -1);
+      const y = bass * 4 * (i < 2 ? 1 : -1);
+      img.style.transform = `scale(${s}) translateY(${y}px)`;
+    });
+
+    floatPhotos.forEach((el, i) => {
+      const r = (i === 0 ? mid * 6 : -high * 4);
+      const s = 1 + avg * 0.06;
+      const base = el.dataset.base || '';
+      el.style.transform = `${base} scale(${s}) rotate(${r}deg)`;
+    });
+
+    sidePhotos.forEach((el, i) => {
+      const s = 1 + bass * 0.08 * (i % 2 === 0 ? 1 : -0.5);
+      el.style.transform = `${el.dataset.base || ''} scale(${s})`;
+    });
+
+    if (titleBg) {
+      const p = 1 + avg * 0.015;
+      titleBg.style.transform = `scale(${p})`;
+    }
+
+    if (toggle) {
+      const s = 1 + bass * 0.1;
+      toggle.style.transform = `scale(${s})`;
+    }
+  }
+
   function playMusic() {
+    if (!ctx) initAudio();
+    if (ctx.state === 'suspended') ctx.resume();
     music.play().then(() => {
       toggle.classList.add('playing');
       toggle.innerHTML = '&#9836;';
