@@ -194,12 +194,15 @@
 
     .form-side {
       flex: 0 0 240px;
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
       padding-top: 40px;
+      align-items: center;
     }
 
     .form-side .side-photo {
-      position: absolute;
+      position: relative;
       border-radius: 4px;
       overflow: hidden;
       box-shadow: 0 8px 30px rgba(0,0,0,0.08);
@@ -225,31 +228,16 @@
     .form-side .side-photo:nth-child(1) {
       width: 200px;
       height: 260px;
-      top: 0;
-      left: 0;
-      z-index: 2;
     }
 
     .form-side .side-photo:nth-child(2) {
       width: 160px;
       height: 210px;
-      top: 140px;
-      left: 80px;
-      z-index: 1;
-    }
-
-    .form-side:last-child .side-photo:nth-child(1) {
-      left: auto;
-      right: 0;
-    }
-
-    .form-side:last-child .side-photo:nth-child(2) {
-      left: auto;
-      right: 80px;
     }
 
     .form-side .side-photo:hover {
-      z-index: 5;
+      transform: scale(1.03) !important;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
     }
 
     @media (max-width: 1000px) {
@@ -783,7 +771,7 @@
 
   function playMusic() {
     if (!ctx) initAudio();
-    if (ctx.state === 'suspended') ctx.resume();
+    if (ctx && ctx.state === 'suspended') ctx.resume();
     music.play().then(() => {
       toggle.classList.add('playing');
       toggle.innerHTML = '&#9836;';
@@ -791,13 +779,20 @@
     }).catch(() => {});
   }
 
-  music.addEventListener('canplaythrough', playMusic, { once: true });
+  function tryPlay() { if (!started) playMusic(); }
 
-  setTimeout(() => {
-    if (!started) playMusic();
-  }, 1000);
+  music.addEventListener('canplaythrough', tryPlay, { once: true });
+  music.addEventListener('loadeddata', tryPlay, { once: true });
 
-  toggle.addEventListener('click', () => {
+  setTimeout(tryPlay, 500);
+  setTimeout(tryPlay, 1500);
+  setTimeout(tryPlay, 3000);
+
+  document.addEventListener('click', tryPlay, { once: true });
+  document.addEventListener('touchstart', tryPlay, { once: true });
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
     if (music.paused) {
       playMusic();
     } else {
