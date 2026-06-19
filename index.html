@@ -659,7 +659,7 @@
 
 <button class="music-toggle" id="musicToggle" aria-label="Toggle music">&#9835;</button>
 
-<div class="footer">Made with love &mdash; October 18, 2026 <span style="opacity:0.4;display:block;margin-top:4px;font-size:0.75rem">&#9835; Click the note to play music</span></div>
+<div class="footer">Made with love &mdash; October 18, 2026 <span style="opacity:0.4;display:block;margin-top:4px;font-size:0.75rem">&#9835; Click the note to toggle music</span></div>
 
 <script>
   let guestCount = 1;
@@ -735,16 +735,25 @@
   const toggle = document.getElementById('musicToggle');
   let started = false;
 
-  toggle.addEventListener('click', () => {
-    if (!started) {
-      music.play();
+  music.volume = 0.4;
+
+  function playMusic() {
+    music.play().then(() => {
       toggle.classList.add('playing');
       toggle.innerHTML = '&#9836;';
       started = true;
-    } else if (music.paused) {
-      music.play();
-      toggle.classList.add('playing');
-      toggle.innerHTML = '&#9836;';
+    }).catch(() => {});
+  }
+
+  music.addEventListener('canplaythrough', playMusic, { once: true });
+
+  setTimeout(() => {
+    if (!started) playMusic();
+  }, 1000);
+
+  toggle.addEventListener('click', () => {
+    if (music.paused) {
+      playMusic();
     } else {
       music.pause();
       toggle.classList.remove('playing');
