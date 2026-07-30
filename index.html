@@ -301,62 +301,6 @@
       accent-color: #5c7a5c;
     }
 
-    select {
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5'       stroke='%235c7a5c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-    }
-
-    .guest-entry {
-      background: #f2f5ee;
-      padding: 20px;
-      border-radius: 2px;
-      margin-bottom: 12px;
-    }
-
-    .guest-entry .form-group:last-child {
-      margin-bottom: 0;
-    }
-
-    .guest-entry label {
-      font-size: 0.8rem;
-    }
-
-    .add-guest-btn {
-      background: none;
-      border: 1px dashed #bcc9b0;
-      padding: 10px 20px;
-      width: 100%;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.9rem;
-      color: #5a6a5a;
-      cursor: pointer;
-      border-radius: 2px;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .add-guest-btn:hover {
-      border-color: #5c7a5c;
-      color: #5c7a5c;
-    }
-
-    .remove-guest {
-      background: none;
-      border: none;
-      color: #a0b09a;
-      cursor: pointer;
-      font-size: 0.8rem;
-      text-decoration: underline;
-      padding: 0;
-      margin-top: 8px;
-    }
-
-    .remove-guest:hover {
-      color: #5c7a5c;
-    }
-
     .submit-btn {
       width: 100%;
       padding: 16px;
@@ -405,7 +349,7 @@
       line-height: 1.8;
     }
 
-    .success.hidden, form.hidden, .add-guest-entry.hidden {
+    .success.hidden, form.hidden {
       display: none;
     }
 
@@ -591,17 +535,6 @@
       <input type="text" id="name" name="name" placeholder="First and last name" required>
     </div>
 
-    <div id="guestContainer">
-      <div class="guest-entry" data-index="0">
-        <div class="form-group">
-          <label>Guest name</label>
-          <input type="text" name="guest_name_0" placeholder="First and last name" class="guest-name">
-        </div>
-      </div>
-    </div>
-
-    <button type="button" class="add-guest-btn" id="addGuestBtn">+ Add another guest</button>
-
     <div class="form-group" style="margin-top:24px">
       <label for="message">Message for the couple (optional)</label>
       <input type="text" id="message" name="message" placeholder="Write a note...">
@@ -643,24 +576,6 @@
 <div class="footer">Made with love &mdash; October 18, 2026 <span style="opacity:0.4;display:block;margin-top:4px;font-size:0.75rem">&#9835; Click the note to toggle music</span></div>
 
 <script>
-  let guestCount = 1;
-
-  document.getElementById('addGuestBtn').addEventListener('click', () => {
-    const container = document.getElementById('guestContainer');
-    const div = document.createElement('div');
-    div.className = 'guest-entry';
-    div.dataset.index = guestCount;
-    div.innerHTML = `
-      <div class="form-group">
-        <label>Guest name</label>
-        <input type="text" name="guest_name_${guestCount}" placeholder="First and last name" class="guest-name">
-      </div>
-      <button type="button" class="remove-guest" onclick="this.closest('.guest-entry').remove()">Remove</button>
-    `;
-    container.appendChild(div);
-    guestCount++;
-  });
-
   document.getElementById('rsvpForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -673,16 +588,9 @@
     }
     document.getElementById('formError').classList.remove('visible');
 
-    const guests = [];
-    document.querySelectorAll('.guest-entry').forEach(el => {
-      const gName = el.querySelector('.guest-name').value.trim();
-      if (gName) guests.push({ name: gName });
-    });
-
     const payload = {
       attending: attending.value,
       name,
-      guests,
       message: document.getElementById('message').value.trim()
     };
 
