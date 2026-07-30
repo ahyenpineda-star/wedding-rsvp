@@ -153,63 +153,8 @@
       gap: 20px;
     }
 
-    .form-side {
-      flex: 0 0 240px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      padding-top: 40px;
-      align-items: center;
-    }
-
-    .form-side .side-photo {
-      position: relative;
-      border-radius: 4px;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
-    }
-
-    .form-side .side-photo::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(160deg, rgba(92,122,92,0.25), rgba(26,42,26,0.15));
-      pointer-events: none;
-      mix-blend-mode: overlay;
-    }
-
-    .form-side .side-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .form-side .side-photo:nth-child(1) {
-      width: 200px;
-      height: 260px;
-    }
-
-    .form-side .side-photo:nth-child(2) {
-      width: 160px;
-      height: 210px;
-    }
-
-    .form-side .side-photo:hover {
-      transform: scale(1.03) !important;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-    }
-
     @media (max-width: 1000px) {
-      .form-side { display: none; }
       .form-wrapper { justify-content: center; }
-    }
-
-    .container {
-      flex: 1;
-      max-width: 600px;
-      min-width: 0;
     }
 
     .art-divider {
@@ -233,48 +178,73 @@
       background: linear-gradient(90deg, transparent, #bcc9b0, transparent);
     }
 
-    .gallery {
-      max-width: 1200px;
+    .side-scene {
+      display: flex;
+      gap: 20px;
+      max-width: 1300px;
       margin: 0 auto 60px;
       padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+      align-items: flex-start;
     }
 
-    .gallery-item {
+    .side-scene .side {
+      flex: 0 0 180px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .side-scene .side .side-card {
       border-radius: 4px;
       overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
       position: relative;
     }
 
-    .gallery-item:hover {
-      transform: scale(1.02);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    .side-scene .side .side-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(92,122,92,0.2), rgba(26,42,26,0.1));
+      pointer-events: none;
+      mix-blend-mode: overlay;
     }
 
-    .gallery-item img {
+    .side-scene .side .side-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
 
-    .gallery-item:nth-child(1) { grid-row: span 2; grid-column: span 1; }
-    .gallery-item:nth-child(4) { grid-row: span 2; grid-column: span 1; }
-    .gallery-item:nth-child(7) { grid-column: span 2; }
-
-    @media (max-width: 768px) {
-      .gallery { grid-template-columns: repeat(2, 1fr); }
-      .gallery-item:nth-child(1),
-      .gallery-item:nth-child(4),
-      .gallery-item:nth-child(7) { grid-row: span 1; grid-column: span 1; }
+    .side-scene .side .side-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
 
-    @media (max-width: 480px) {
-      .gallery { grid-template-columns: 1fr; }
+    .side-scene .side-left .side-card:nth-child(1) { height: 240px; }
+    .side-scene .side-left .side-card:nth-child(2) { height: 180px; }
+    .side-scene .side-left .side-card:nth-child(3) { height: 210px; }
+    .side-scene .side-left .side-card:nth-child(4) { height: 160px; }
+
+    .side-scene .side-right .side-card:nth-child(1) { height: 180px; }
+    .side-scene .side-right .side-card:nth-child(2) { height: 220px; }
+    .side-scene .side-right .side-card:nth-child(3) { height: 170px; }
+    .side-scene .side-right .side-card:nth-child(4) { height: 200px; }
+    .side-scene .side-right .side-card:nth-child(5) { height: 150px; }
+
+    .side-scene .center {
+      flex: 1;
+      min-width: 0;
+    }
+
+    @media (max-width: 1000px) {
+      .side-scene .side { display: none; }
+    }
+
+    .art-divider + .side-scene {
+      margin-top: 60px;
     }
 
     .art-divider + .form-wrapper {
@@ -561,26 +531,18 @@
 
 <div class="art-divider">Be a part of our Story</div>
 
-<div class="gallery">
-  <div class="gallery-item"><img src="pics/photo-01.jpg" alt="" loading="lazy"></div>
-  <div class="gallery-item"><img src="pics/photo-02.jpg" alt="" loading="lazy"></div>
-  <div class="gallery-item"><img src="pics/photo-03.jpg" alt="" loading="lazy"></div>
-  <div class="gallery-item"><img src="pics/photo-04.jpg" alt="" loading="lazy"></div>
-  <div class="gallery-item"><img src="pics/photo-05.jpg" alt="" loading="lazy"></div>
-  <div class="gallery-item"><img src="pics/photo-06.jpg" alt="" loading="lazy"></div>
-  <div class="gallery-item"><img src="pics/photo-07.jpg" alt="" loading="lazy"></div>
-  <div class="gallery-item"><img src="pics/photo-08.jpg" alt="" loading="lazy"></div>
-  <div class="gallery-item"><img src="pics/photo-09.jpg" alt="" loading="lazy"></div>
-</div>
+<div class="side-scene">
 
-<div class="form-wrapper">
-
-  <div class="form-side">
-    <div class="side-photo" data-base="rotate(-3deg)"><img src="pics/photo-07.jpg" alt="" loading="lazy"></div>
-    <div class="side-photo" data-base="rotate(5deg)"><img src="pics/photo-08.jpg" alt="" loading="lazy"></div>
+  <div class="side side-left">
+    <div class="side-card" data-base="rotate(-2deg)"><img src="pics/photo-01.jpg" alt="" loading="lazy"></div>
+    <div class="side-card" data-base="rotate(3deg)"><img src="pics/photo-02.jpg" alt="" loading="lazy"></div>
+    <div class="side-card" data-base="rotate(-1deg)"><img src="pics/photo-03.jpg" alt="" loading="lazy"></div>
+    <div class="side-card" data-base="rotate(2deg)"><img src="pics/photo-04.jpg" alt="" loading="lazy"></div>
   </div>
 
-  <div class="container">
+  <div class="center">
+
+  <div class="form-wrapper">
 
   <form id="rsvpForm">
     <div class="form-group">
@@ -616,11 +578,16 @@
     </p>
   </div>
 
+</div>
+
   </div>
 
-  <div class="form-side">
-    <div class="side-photo" data-base="rotate(3deg)"><img src="pics/photo-09.jpg" alt="" loading="lazy"></div>
-    <div class="side-photo" data-base="rotate(-5deg)"><img src="pics/photo-01.jpg" alt="" loading="lazy"></div>
+  <div class="side side-right">
+    <div class="side-card" data-base="rotate(2deg)"><img src="pics/photo-05.jpg" alt="" loading="lazy"></div>
+    <div class="side-card" data-base="rotate(-3deg)"><img src="pics/photo-06.jpg" alt="" loading="lazy"></div>
+    <div class="side-card" data-base="rotate(1deg)"><img src="pics/photo-07.jpg" alt="" loading="lazy"></div>
+    <div class="side-card" data-base="rotate(-2deg)"><img src="pics/photo-08.jpg" alt="" loading="lazy"></div>
+    <div class="side-card" data-base="rotate(4deg)"><img src="pics/photo-09.jpg" alt="" loading="lazy"></div>
   </div>
 
 </div>
@@ -678,7 +645,6 @@
   let ctx, analyser, src, dataArray;
   const heroImgs = document.querySelectorAll('.hero-bg img');
   const floatPhotos = document.querySelectorAll('.floating-photo');
-  const sidePhotos = document.querySelectorAll('.side-photo');
   const titleBg = document.querySelector('.title-bg');
 
   function initAudio() {
@@ -712,11 +678,6 @@
       const s = 1 + avg * 0.06;
       const base = el.dataset.base || '';
       el.style.transform = `${base} scale(${s}) rotate(${r}deg)`;
-    });
-
-    sidePhotos.forEach((el, i) => {
-      const s = 1 + bass * 0.08 * (i % 2 === 0 ? 1 : -0.5);
-      el.style.transform = `${el.dataset.base || ''} scale(${s})`;
     });
 
     if (titleBg) {
