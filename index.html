@@ -143,14 +143,10 @@
 
     .form-wrapper {
       width: 100%;
-      max-width: 1200px;
-      padding: 0 20px 60px;
+      padding: 0 0 60px;
       margin-top: 40px;
       position: relative;
       z-index: 3;
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
     }
 
     @media (max-width: 1000px) {
@@ -188,7 +184,7 @@
     }
 
     .side-scene .side {
-      flex: 0 0 180px;
+      flex: 0 0 240px;
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -223,23 +219,61 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
 
-    .side-scene .side-left .side-card:nth-child(1) { height: 240px; }
-    .side-scene .side-left .side-card:nth-child(2) { height: 180px; }
-    .side-scene .side-left .side-card:nth-child(3) { height: 210px; }
-    .side-scene .side-left .side-card:nth-child(4) { height: 160px; }
+    .side-scene .side-left .side-card:nth-child(1) { height: 300px; }
+    .side-scene .side-left .side-card:nth-child(2) { height: 240px; }
+    .side-scene .side-left .side-card:nth-child(3) { height: 270px; }
+    .side-scene .side-left .side-card:nth-child(4) { height: 210px; }
 
-    .side-scene .side-right .side-card:nth-child(1) { height: 180px; }
-    .side-scene .side-right .side-card:nth-child(2) { height: 220px; }
-    .side-scene .side-right .side-card:nth-child(3) { height: 170px; }
-    .side-scene .side-right .side-card:nth-child(4) { height: 200px; }
+    .side-scene .side-right .side-card:nth-child(1) { height: 240px; }
+    .side-scene .side-right .side-card:nth-child(2) { height: 280px; }
+    .side-scene .side-right .side-card:nth-child(3) { height: 230px; }
+    .side-scene .side-right .side-card:nth-child(4) { height: 260px; }
 
     .side-scene .center {
       flex: 1;
       min-width: 0;
+      max-width: 640px;
     }
 
     @media (max-width: 1000px) {
       .side-scene .side { display: none; }
+    }
+
+    .bottom-photos {
+      display: flex;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .bottom-photos .bottom-photo {
+      flex: 1;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      position: relative;
+      height: 220px;
+    }
+
+    .bottom-photos .bottom-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(92,122,92,0.2), rgba(26,42,26,0.1));
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+
+    .bottom-photos .bottom-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .bottom-photos .bottom-photo:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
 
     .art-divider + .side-scene {
@@ -575,6 +609,11 @@
     <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; color: #5c7a5c;">
       Mary &amp; Mel
     </p>
+  </div>
+
+  <div class="bottom-photos">
+    <div class="bottom-photo" data-base="rotate(-2deg)"><img src="pics/photo-03.jpg" alt="" loading="lazy"></div>
+    <div class="bottom-photo" data-base="rotate(2deg)"><img src="pics/photo-06.jpg" alt="" loading="lazy"></div>
   </div>
 
 </div>
