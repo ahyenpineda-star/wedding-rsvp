@@ -233,6 +233,50 @@
       background: linear-gradient(90deg, transparent, #bcc9b0, transparent);
     }
 
+    .gallery {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .gallery-item {
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .gallery-item:nth-child(1) { grid-row: span 2; grid-column: span 1; }
+    .gallery-item:nth-child(4) { grid-row: span 2; grid-column: span 1; }
+    .gallery-item:nth-child(7) { grid-column: span 2; }
+
+    @media (max-width: 768px) {
+      .gallery { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(4),
+      .gallery-item:nth-child(7) { grid-row: span 1; grid-column: span 1; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery { grid-template-columns: 1fr; }
+    }
+
     .art-divider + .form-wrapper {
       margin-top: 80px;
     }
@@ -489,10 +533,10 @@
 
 <section class="hero">
   <div class="hero-bg">
-    <img src="pics/1.jpg" alt="">
-    <img src="pics/2.jpg" alt="">
-    <img src="pics/3.jpg" alt="">
-    <img src="pics/4.jpg" alt="">
+    <img src="pics/photo-01.jpg" alt="">
+    <img src="pics/photo-02.jpg" alt="">
+    <img src="pics/photo-03.jpg" alt="">
+    <img src="pics/photo-04.jpg" alt="">
   </div>
   <div class="hero-overlay"></div>
 
@@ -506,22 +550,34 @@
   </div>
 </section>
 
-<div class="float-row">
-  <div class="floating-photo" data-base="rotate(-2deg)">
-    <img src="pics/3.jpg" alt="">
+  <div class="float-row">
+    <div class="floating-photo" data-base="rotate(-2deg)">
+      <img src="pics/photo-05.jpg" alt="">
+    </div>
+    <div class="floating-photo" data-base="rotate(2deg)">
+      <img src="pics/photo-06.jpg" alt="">
+    </div>
   </div>
-  <div class="floating-photo" data-base="rotate(2deg)">
-    <img src="pics/1.jpg" alt="">
-  </div>
-</div>
 
 <div class="art-divider">Be a part of our Story</div>
+
+<div class="gallery">
+  <div class="gallery-item"><img src="pics/photo-01.jpg" alt="" loading="lazy"></div>
+  <div class="gallery-item"><img src="pics/photo-02.jpg" alt="" loading="lazy"></div>
+  <div class="gallery-item"><img src="pics/photo-03.jpg" alt="" loading="lazy"></div>
+  <div class="gallery-item"><img src="pics/photo-04.jpg" alt="" loading="lazy"></div>
+  <div class="gallery-item"><img src="pics/photo-05.jpg" alt="" loading="lazy"></div>
+  <div class="gallery-item"><img src="pics/photo-06.jpg" alt="" loading="lazy"></div>
+  <div class="gallery-item"><img src="pics/photo-07.jpg" alt="" loading="lazy"></div>
+  <div class="gallery-item"><img src="pics/photo-08.jpg" alt="" loading="lazy"></div>
+  <div class="gallery-item"><img src="pics/photo-09.jpg" alt="" loading="lazy"></div>
+</div>
 
 <div class="form-wrapper">
 
   <div class="form-side">
-    <div class="side-photo" data-base="rotate(-3deg)"><img src="pics/2.jpg" alt="" loading="lazy"></div>
-    <div class="side-photo" data-base="rotate(5deg)"><img src="pics/4.jpg" alt="" loading="lazy"></div>
+    <div class="side-photo" data-base="rotate(-3deg)"><img src="pics/photo-07.jpg" alt="" loading="lazy"></div>
+    <div class="side-photo" data-base="rotate(5deg)"><img src="pics/photo-08.jpg" alt="" loading="lazy"></div>
   </div>
 
   <div class="container">
@@ -563,8 +619,8 @@
   </div>
 
   <div class="form-side">
-    <div class="side-photo" data-base="rotate(3deg)"><img src="pics/3.jpg" alt="" loading="lazy"></div>
-    <div class="side-photo" data-base="rotate(-5deg)"><img src="pics/1.jpg" alt="" loading="lazy"></div>
+    <div class="side-photo" data-base="rotate(3deg)"><img src="pics/photo-09.jpg" alt="" loading="lazy"></div>
+    <div class="side-photo" data-base="rotate(-5deg)"><img src="pics/photo-01.jpg" alt="" loading="lazy"></div>
   </div>
 
 </div>
