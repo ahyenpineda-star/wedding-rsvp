@@ -602,15 +602,6 @@
           <label>Guest name</label>
           <input type="text" name="guest_name_0" placeholder="First and last name" class="guest-name">
         </div>
-        <div class="form-group">
-          <label>Meal preference</label>
-          <select name="guest_meal_0" class="guest-meal">
-            <option value="chicken">Chicken</option>
-            <option value="fish">Fish</option>
-            <option value="vegetarian">Vegetarian</option>
-            <option value="kids">Kids meal</option>
-          </select>
-        </div>
       </div>
     </div>
 
@@ -669,15 +660,6 @@
         <label>Guest name</label>
         <input type="text" name="guest_name_${guestCount}" placeholder="First and last name" class="guest-name">
       </div>
-      <div class="form-group">
-        <label>Meal preference</label>
-        <select name="guest_meal_${guestCount}" class="guest-meal">
-          <option value="chicken">Chicken</option>
-          <option value="fish">Fish</option>
-          <option value="vegetarian">Vegetarian</option>
-          <option value="kids">Kids meal</option>
-        </select>
-      </div>
       <button type="button" class="remove-guest" onclick="this.closest('.guest-entry').remove()">Remove</button>
     `;
     container.appendChild(div);
@@ -700,8 +682,7 @@
     const guests = [];
     document.querySelectorAll('.guest-entry').forEach(el => {
       const gName = el.querySelector('.guest-name').value.trim();
-      const gMeal = el.querySelector('.guest-meal').value;
-      if (gName) guests.push({ name: gName, meal: gMeal });
+      if (gName) guests.push({ name: gName });
     });
 
     const payload = {
