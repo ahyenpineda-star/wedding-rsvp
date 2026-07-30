@@ -587,11 +587,6 @@
     </div>
 
     <div class="form-group">
-      <label for="email">Email address</label>
-      <input type="email" id="email" name="email" placeholder="your@email.com" required>
-    </div>
-
-    <div class="form-group">
       <label>Your name</label>
       <input type="text" id="name" name="name" placeholder="First and last name" required>
     </div>
@@ -670,10 +665,9 @@
     e.preventDefault();
 
     const attending = document.querySelector('input[name="attending"]:checked');
-    const email = document.getElementById('email').value.trim();
     const name = document.getElementById('name').value.trim();
 
-    if (!attending || !email || !name) {
+    if (!attending || !name) {
       document.getElementById('formError').classList.add('visible');
       return;
     }
@@ -687,7 +681,6 @@
 
     const payload = {
       attending: attending.value,
-      email,
       name,
       guests,
       message: document.getElementById('message').value.trim()
