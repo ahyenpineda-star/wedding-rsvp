@@ -276,6 +276,29 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.12);
     }
 
+    .quote {
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: #5a6a5a;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: 10px auto 0;
+      padding: 0 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .quote::before,
+    .quote::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: #d4ddd0;
+      margin: 20px auto;
+    }
+
     .art-divider + .side-scene {
       margin-top: 60px;
     }
@@ -563,6 +586,8 @@
   </div>
 
 <div class="art-divider">Be a part of our Story</div>
+
+<div class="quote">"This is not the start of something new,<br>but the continuation of something true."</div>
 
 <div class="side-scene">
 
