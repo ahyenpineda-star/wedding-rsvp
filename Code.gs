@@ -19,7 +19,7 @@ function doPost(e) {
     sheet.appendRow([
       new Date(),
       data.name || '',
-      data.attending || '',
+      (data.attending || '').toUpperCase(),
       data.message || ''
     ]);
 
