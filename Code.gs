@@ -1,17 +1,25 @@
 function doPost(e) {
   try {
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('RSVPs') || 
-                  SpreadsheetApp.getActiveSpreadsheet().insertSheet('RSVPs');
-
-    if (sheet.getLastRow() === 0) {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    let sheet = ss.getSheetByName('RSVPs');
+    if (!sheet) {
+      sheet = ss.insertSheet('RSVPs');
       sheet.appendRow(['Timestamp', 'Name', 'Attending', 'Message']);
     }
 
-    const data = JSON.parse(e.postData.contents);
+    let data;
+    if (e.postData && e.postData.contents) {
+      data = JSON.parse(e.postData.contents);
+    } else if (e.parameter) {
+      data = e.parameter;
+    } else {
+      throw new Error('No data received');
+    }
+
     sheet.appendRow([
       new Date(),
-      data.name,
-      data.attending,
+      data.name || '',
+      data.attending || '',
       data.message || ''
     ]);
 
@@ -25,7 +33,12 @@ function doPost(e) {
   }
 }
 
-function doGet() {
+function doGet(e) {
+  if (e && e.parameter && e.parameter.ping) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ status: 'ok' }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   return ContentService
     .createTextOutput('RSVP webhook is running.')
     .setMimeType(ContentService.MimeType.TEXT);
