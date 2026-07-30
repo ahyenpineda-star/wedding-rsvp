@@ -690,7 +690,7 @@
     document.getElementById('successMessage').classList.remove('hidden');
 
     if (typeof fetch === 'function') {
-      fetch('https://formspree.io/f/your-form-id', {
+      fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
