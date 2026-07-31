@@ -23,6 +23,8 @@ function doPost(e) {
       data.message || ''
     ]);
 
+    updateSummary();
+
     return ContentService
       .createTextOutput(JSON.stringify({ success: true }))
       .setMimeType(ContentService.MimeType.JSON);
@@ -42,4 +44,35 @@ function doGet(e) {
   return ContentService
     .createTextOutput('RSVP webhook is running.')
     .setMimeType(ContentService.MimeType.TEXT);
+}
+
+function updateSummary() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let summary = ss.getSheetByName('Summary');
+  if (!summary) {
+    summary = ss.insertSheet('Summary');
+    summary.setTabColor('#5c7a5c');
+  }
+
+  summary.clear();
+
+  summary.getRange('A1').setValue('RSVP Response Tracker');
+  summary.getRange('A1:B1').merge();
+  summary.getRange('A1').setFontSize(16).setFontWeight('bold').setFontColor('#2a3a2a');
+  summary.getRange('A1:B1').setHorizontalAlignment('center').setBackground('#d8e2d3');
+
+  summary.getRange('A3').setValue('Total Responses');
+  summary.getRange('B3').setFormula('=COUNTA(RSVPs!B2:B)');
+  summary.getRange('A4').setValue('Accepted (YES)');
+  summary.getRange('B4').setFormula('=COUNTIF(RSVPs!C2:C,"YES")');
+  summary.getRange('A5').setValue('Declined (NO)');
+  summary.getRange('B5').setFormula('=COUNTIF(RSVPs!C2:C,"NO")');
+
+  summary.getRange('A3:A5').setFontWeight('bold').setFontColor('#2a3a2a');
+  summary.getRange('A3:A5').setBackground('#f2f5ee');
+  summary.getRange('B3:B5').setFontSize(14).setFontWeight('bold').setFontColor('#5c7a5c');
+  summary.getRange('B3:B5').setHorizontalAlignment('center').setBackground('#ffffff');
+  summary.getRange('B3:B5').setBorder(true, true, true, true, false, false);
+
+  summary.setColumnWidths(1, 2, 220);
 }
