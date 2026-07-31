@@ -307,35 +307,61 @@
       margin-top: 80px;
     }
 
-    .details {
-      width: 100%;
+    .bottom-details {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      padding: 10px 20px 20px;
+      min-height: 220px;
+      padding: 24px 18px;
+      background: rgba(26,42,26,0.75);
+      backdrop-filter: blur(4px);
+      border-radius: 4px;
+      border: 1px solid rgba(188,201,176,0.15);
     }
 
-    .detail-item {
-      margin-bottom: 30px;
+    .bottom-details .bd-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 6px;
     }
 
-    .detail-item:last-child {
+    .bottom-details .bd-rule {
+      width: 40px;
+      height: 1px;
+      background: #bcc9b0;
+      margin: 0 auto 16px;
+    }
+
+    .bottom-details .bd-item {
+      margin-bottom: 14px;
+    }
+
+    .bottom-details .bd-item:last-child {
       margin-bottom: 0;
     }
 
-    .detail-label {
+    .bottom-details .bd-label {
       display: block;
-      font-size: 0.75rem;
+      font-size: 0.65rem;
       font-weight: 500;
-      letter-spacing: 4px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: #8a9d8a;
-      margin-bottom: 8px;
+      color: #bcc9b0;
+      margin-bottom: 4px;
     }
 
-    .detail-value {
+    .bottom-details .bd-value {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 1.7rem;
-      color: #2a3a2a;
+      font-size: 1.2rem;
+      color: #fff;
       letter-spacing: 1px;
     }
 
@@ -578,6 +604,8 @@
       .hero-bg img { opacity: 0.25; }
       .float-row { gap: 12px; padding: 24px 12px 0; }
       .float-row .floating-photo { width: 140px; height: 180px; }
+      .bottom-photos { flex-wrap: wrap; }
+      .bottom-details { flex-basis: 100%; min-height: auto; }
     }
 
     @media (max-width: 480px) {
@@ -670,6 +698,22 @@
 
   <div class="bottom-photos">
     <div class="bottom-photo" data-base="rotate(-2deg)"><img src="pics/photo-03.jpg" alt="" loading="lazy"></div>
+    <div class="bottom-details">
+      <div class="bd-title">Wedding Details</div>
+      <div class="bd-rule"></div>
+      <div class="bd-item">
+        <span class="bd-label">Dress Code</span>
+        <span class="bd-value">Semiformal</span>
+      </div>
+      <div class="bd-item">
+        <span class="bd-label">Ceremony &amp; Reception</span>
+        <span class="bd-value">TBA</span>
+      </div>
+      <div class="bd-item">
+        <span class="bd-label">Ceremony</span>
+        <span class="bd-value">3:00 in the Afternoon</span>
+      </div>
+    </div>
     <div class="bottom-photo" data-base="rotate(2deg)"><img src="pics/photo-06.jpg" alt="" loading="lazy"></div>
   </div>
 
@@ -684,25 +728,6 @@
     <div class="side-card" data-base="rotate(-2deg)"><img src="pics/photo-08.jpg" alt="" loading="lazy"></div>
   </div>
 
-</div>
-
-<div class="details">
-  <div class="art-divider">Wedding Details</div>
-
-  <div class="detail-item">
-    <span class="detail-label">Dress Code</span>
-    <span class="detail-value">Semiformal</span>
-  </div>
-
-  <div class="detail-item">
-    <span class="detail-label">Ceremony &amp; Reception</span>
-    <span class="detail-value">TBA</span>
-  </div>
-
-  <div class="detail-item">
-    <span class="detail-label">Ceremony</span>
-    <span class="detail-value">3:00 in the Afternoon</span>
-  </div>
 </div>
 
 <div class="splash" id="splash">
