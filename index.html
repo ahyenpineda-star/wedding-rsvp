@@ -793,6 +793,12 @@
       .bottom-photos .bottom-photo { flex: 0 0 calc(50% - 7px); height: 170px; }
       .mobile-photo { display: block; }
 
+      .bottom-photos > *:nth-child(1) { order: 1; }
+      .bottom-photos > *:nth-child(2) { order: 3; }
+      .bottom-photos > *:nth-child(3) { order: 2; }
+      .bottom-photos > *:nth-child(4) { order: 1; }
+      .bottom-photos > *:nth-child(5) { order: 3; }
+
       .bottom-details {
         flex-basis: 100%;
         min-height: auto;
