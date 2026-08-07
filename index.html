@@ -612,6 +612,218 @@
       form { padding: 32px 20px; }
       .radio-group { flex-direction: column; gap: 8px; }
     }
+
+    /* --- Elegant refinements (all screens) --- */
+
+    .hero-content .ampersand { color: #d8c9a6; }
+
+    .splash::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('pics/photo-03.jpg');
+      background-size: cover;
+      background-position: 50% 30%;
+      opacity: 0.16;
+      filter: blur(2px);
+    }
+
+    .splash-frame {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 46px 42px 40px;
+      border: 1px solid rgba(188,201,176,0.35);
+      outline: 1px solid rgba(188,201,176,0.18);
+      outline-offset: 9px;
+    }
+
+    .splash-flower {
+      display: block;
+      color: #d8c9a6;
+      font-size: 1.05rem;
+      margin-bottom: 18px;
+      letter-spacing: 6px;
+    }
+
+    .splash-rule {
+      width: 56px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(188,201,176,0.7), transparent);
+      margin: 18px auto 16px;
+    }
+
+    .form-heading {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .form-heading .fh-flower {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid #d4ddd0;
+      border-radius: 50%;
+      color: #c9a86a;
+      font-size: 1.15rem;
+      margin-bottom: 16px;
+    }
+
+    .form-heading .fh-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 2.3rem;
+      color: #2a3a2a;
+      letter-spacing: 4px;
+    }
+
+    .form-heading .fh-rule {
+      width: 64px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #bcc9b0, transparent);
+      margin: 16px auto 0;
+    }
+
+    /* --- Mobile: artistic & elegant --- */
+
+    @media (max-width: 640px) {
+      html { -webkit-text-size-adjust: 100%; }
+
+      .hero-bg {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        animation: heroZoom 26s ease-in-out infinite;
+      }
+      .hero-bg img:not(:first-child) { display: none; }
+      .hero-bg img:first-child { opacity: 0.45; object-position: 50% 28%; }
+
+      @keyframes heroZoom {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.06); }
+      }
+
+      .hero-overlay {
+        background:
+          linear-gradient(180deg,
+            rgba(26,42,26,0.55) 0%,
+            rgba(26,42,26,0.25) 45%,
+            rgba(92,122,92,0.10) 72%,
+            rgba(242,245,238,0.97) 100%);
+      }
+
+      .hero-content { padding: 0 24px 150px; }
+
+      .hero-content .title-bg {
+        padding: 36px 26px 32px;
+        background: rgba(24,36,24,0.32);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(222,232,210,0.3);
+        box-shadow: 0 24px 70px rgba(10,20,10,0.3);
+      }
+
+      .hero-content h1 { font-size: 2.9rem; letter-spacing: 4px; }
+      .hero-content .date { font-size: 0.9rem; letter-spacing: 3px; }
+      .hero-content .tagline { font-size: 1.3rem; }
+      .hero-content .divider { margin: 18px auto; }
+
+      .float-row {
+        gap: 16px;
+        padding: 36px 18px 0;
+        position: relative;
+        z-index: 2;
+      }
+      .float-row .floating-photo {
+        flex: 0 0 150px;
+        width: 150px;
+        height: auto;
+        padding: 9px 9px 12px;
+        background: #fffdf8;
+        border-radius: 3px;
+        overflow: visible;
+        box-shadow: 0 14px 36px rgba(26,42,26,0.18);
+      }
+      .float-row .floating-photo img {
+        height: 165px;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 1px;
+      }
+      .float-row .floating-photo::after {
+        content: attr(data-caption);
+        display: block;
+        text-align: center;
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 1rem;
+        color: #6a7a6a;
+        letter-spacing: 1px;
+        padding-top: 10px;
+      }
+
+      .art-divider { font-size: 1.6rem; margin: 34px 0 28px; gap: 14px; }
+
+      .quote { font-size: 1.25rem; }
+      .quote::before {
+        content: '\201C';
+        width: auto;
+        height: auto;
+        background: none;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 4rem;
+        line-height: 1;
+        color: rgba(201,168,106,0.55);
+        margin: 8px 0 -10px;
+      }
+      .quote::after { margin: 18px auto; }
+
+      .form-wrapper { margin-top: 24px; padding-bottom: 44px; }
+
+      form { padding: 36px 22px; }
+      form label { font-size: 0.78rem; }
+      input, select { padding: 13px 14px; }
+
+      .submit-btn { letter-spacing: 3px; }
+
+      .bottom-photos { gap: 14px; }
+      .bottom-photos .bottom-photo { flex: 0 0 calc(50% - 7px); height: 170px; }
+
+      .bottom-details {
+        flex-basis: 100%;
+        min-height: auto;
+        padding: 34px 22px 30px;
+        background: linear-gradient(165deg, #2b3c2b, #1a2a1a);
+        box-shadow: inset 0 0 0 1px rgba(188,201,176,0.16), 0 12px 34px rgba(26,42,26,0.14);
+      }
+
+      .music-toggle {
+        width: 44px;
+        height: 44px;
+        bottom: 18px;
+        right: 18px;
+        font-size: 1.1rem;
+        background: rgba(255,253,248,0.92);
+      }
+
+      .footer { font-size: 0.8rem; padding: 32px 18px 28px; }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -635,18 +847,18 @@
   </div>
 </section>
 
-  <div class="float-row">
-    <div class="floating-photo" data-base="rotate(-2deg)">
+  <div class="float-row reveal">
+    <div class="floating-photo" data-base="rotate(-2deg)" data-caption="Mary &amp; Mel">
       <img src="pics/photo-05.jpg" alt="">
     </div>
-    <div class="floating-photo" data-base="rotate(2deg)">
+    <div class="floating-photo" data-base="rotate(2deg)" data-caption="18 &middot; 10 &middot; 2026">
       <img src="pics/photo-06.jpg" alt="">
     </div>
   </div>
 
-<div class="art-divider">Be a part of our Story</div>
+<div class="art-divider reveal">Be a part of our Story</div>
 
-<div class="quote">"This is not the start of something new,<br>but the continuation of something true."</div>
+<div class="quote reveal">"This is not the start of something new,<br>but the continuation of something true."</div>
 
 <div class="side-scene">
 
@@ -659,9 +871,15 @@
 
   <div class="center">
 
-  <div class="form-wrapper">
+  <div class="form-wrapper reveal">
 
   <form id="rsvpForm">
+    <div class="form-heading">
+      <span class="fh-flower">&#10087;</span>
+      <h3 class="fh-title">Kindly Respond</h3>
+      <div class="fh-rule"></div>
+    </div>
+
     <div class="form-group">
       <label>Guest name</label>
       <input type="text" id="name" name="name" placeholder="First and last name" required>
@@ -695,7 +913,7 @@
     </p>
   </div>
 
-  <div class="bottom-photos">
+  <div class="bottom-photos reveal">
     <div class="bottom-photo" data-base="rotate(-2deg)"><img src="pics/photo-03.jpg" alt="" loading="lazy"></div>
     <div class="bottom-details">
       <div class="bd-title">Wedding Details</div>
@@ -730,8 +948,12 @@
 </div>
 
 <div class="splash" id="splash">
-  <h2>Mary <span style="font-style:italic;color:#bcc9b0">&amp;</span> Mel</h2>
-  <p>Tap to enter</p>
+  <div class="splash-frame">
+    <span class="splash-flower">&#10087;</span>
+    <h2>Mary <span style="font-style:italic;color:#d8c9a6">&amp;</span> Mel</h2>
+    <div class="splash-rule"></div>
+    <p>Tap to enter</p>
+  </div>
 </div>
 
 <audio id="bgMusic" src="music.webm" loop preload="auto"></audio>
@@ -860,6 +1082,21 @@
       toggle.innerHTML = '&#9835;';
     }
   });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(en) {
+        if (en.isIntersecting) {
+          en.target.classList.add('visible');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function(el) { io.observe(el); });
+  } else {
+    revealEls.forEach(function(el) { el.classList.add('visible'); });
+  }
 </script>
 
 </body>
