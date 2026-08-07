@@ -615,6 +615,8 @@
 
     /* --- Elegant refinements (all screens) --- */
 
+    .mobile-photo { display: none; }
+
     .hero-content .ampersand { color: #d8c9a6; }
 
     .splash::before {
@@ -789,6 +791,7 @@
 
       .bottom-photos { gap: 14px; }
       .bottom-photos .bottom-photo { flex: 0 0 calc(50% - 7px); height: 170px; }
+      .mobile-photo { display: block; }
 
       .bottom-details {
         flex-basis: 100%;
@@ -914,6 +917,7 @@
   </div>
 
   <div class="bottom-photos reveal">
+    <div class="bottom-photo mobile-photo" data-base="rotate(1deg)"><img src="pics/photo-02.jpg" alt="" loading="lazy"></div>
     <div class="bottom-photo" data-base="rotate(-2deg)"><img src="pics/photo-03.jpg" alt="" loading="lazy"></div>
     <div class="bottom-details">
       <div class="bd-title">Wedding Details</div>
@@ -932,6 +936,7 @@
       </div>
     </div>
     <div class="bottom-photo" data-base="rotate(2deg)"><img src="pics/photo-06.jpg" alt="" loading="lazy"></div>
+    <div class="bottom-photo mobile-photo" data-base="rotate(-1deg)"><img src="pics/photo-07.jpg" alt="" loading="lazy"></div>
   </div>
 
 </div>
@@ -1071,6 +1076,18 @@
     splash.classList.add('hidden');
     playMusic();
   });
+
+  const tryAutoplay = () => {
+    music.play().then(() => {
+      if (!ctx) initAudio();
+      if (ctx && ctx.state === 'suspended') ctx.resume();
+      splash.classList.add('hidden');
+      toggle.classList.add('playing');
+      toggle.innerHTML = '&#9836;';
+      started = true;
+    }).catch(() => {});
+  };
+  tryAutoplay();
 
   toggle.addEventListener('click', (e) => {
     e.stopPropagation();
