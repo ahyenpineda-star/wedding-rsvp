@@ -1083,18 +1083,6 @@
     playMusic();
   });
 
-  const tryAutoplay = () => {
-    music.play().then(() => {
-      if (!ctx) initAudio();
-      if (ctx && ctx.state === 'suspended') ctx.resume();
-      splash.classList.add('hidden');
-      toggle.classList.add('playing');
-      toggle.innerHTML = '&#9836;';
-      started = true;
-    }).catch(() => {});
-  };
-  tryAutoplay();
-
   toggle.addEventListener('click', (e) => {
     e.stopPropagation();
     if (music.paused) {
