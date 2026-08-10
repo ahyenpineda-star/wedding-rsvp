@@ -1094,11 +1094,19 @@
   function playMusic() {
     if (!ctx) initAudio();
     if (ctx && ctx.state === 'suspended') ctx.resume();
-    music.play().then(() => {
-      toggle.classList.add('playing');
-      toggle.innerHTML = '&#9836;';
-      started = true;
-    }).catch(() => {});
+    const tryPlay = () => {
+      music.play().then(() => {
+        toggle.classList.add('playing');
+        toggle.innerHTML = '&#9836;';
+        started = true;
+      }).catch(() => {});
+    };
+    if (music.readyState >= 3) {
+      tryPlay();
+    } else {
+      music.addEventListener('canplaythrough', tryPlay, { once: true });
+      music.load();
+    }
   }
 
   splash.addEventListener('click', () => {
@@ -1110,17 +1118,6 @@
     splash.classList.add('hidden');
     playMusic();
   });
-
-  const tryAutoplay = () => {
-    music.play().then(() => {
-      if (!ctx) initAudio();
-      if (ctx && ctx.state === 'suspended') ctx.resume();
-      toggle.classList.add('playing');
-      toggle.innerHTML = '&#9836;';
-      started = true;
-    }).catch(() => {});
-  };
-  tryAutoplay();
 
   toggle.addEventListener('click', (e) => {
     e.stopPropagation();
