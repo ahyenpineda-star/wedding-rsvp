@@ -1151,21 +1151,31 @@
 
   const splash = document.getElementById('splash');
 
+  function markPlaying() {
+    toggle.classList.add('playing');
+    toggle.innerHTML = '&#9836;';
+    started = true;
+  }
+
+  function startPlayback() {
+    const p = (ctx && ctx.state === 'suspended') ? ctx.resume() : Promise.resolve();
+    p.then(function() { return music.play(); })
+     .then(markPlaying)
+     .catch(function() {
+       setTimeout(function() {
+         music.play().then(markPlaying).catch(function() {});
+       }, 300);
+     });
+  }
+
   function playMusic() {
     if (!ctx) initAudio();
-    if (ctx && ctx.state === 'suspended') ctx.resume();
-    const tryPlay = () => {
-      music.play().then(() => {
-        toggle.classList.add('playing');
-        toggle.innerHTML = '&#9836;';
-        started = true;
-      }).catch(() => {});
-    };
     if (music.readyState >= 3) {
-      tryPlay();
+      startPlayback();
     } else {
-      music.addEventListener('canplaythrough', tryPlay, { once: true });
+      music.addEventListener('canplaythrough', startPlayback, { once: true });
       music.load();
+      startPlayback();
     }
   }
 
