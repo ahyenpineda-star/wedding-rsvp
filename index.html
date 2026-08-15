@@ -365,6 +365,30 @@
       letter-spacing: 1px;
     }
 
+    .bottom-details .bd-map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 10px 22px;
+      border: 1px solid rgba(188,201,176,0.4);
+      border-radius: 2px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #f2f5ee;
+      background: rgba(92,122,92,0.25);
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+
+    .bottom-details .bd-map-link:hover {
+      background: rgba(216,201,166,0.18);
+      border-color: #d8c9a6;
+      transform: translateY(-1px);
+    }
+
     .bottom-details .bd-swatches {
       display: flex;
       justify-content: center;
@@ -962,12 +986,17 @@
       </div>
       <div class="bd-item">
         <span class="bd-label">Ceremony &amp; Reception</span>
-        <span class="bd-value">TBA</span>
+        <span class="bd-value">Ysabel&rsquo;s Garden Private Resort</span>
+      </div>
+      <div class="bd-item">
+        <span class="bd-label">Address</span>
+        <span class="bd-value">Tibagan, Bustos, Philippines 3007</span>
       </div>
       <div class="bd-item">
         <span class="bd-label">Ceremony</span>
         <span class="bd-value">3:00 in the Afternoon</span>
       </div>
+      <a class="bd-map-link" href="https://maps.app.goo.gl/fDdL6FG5JC8ZNBqU8" target="_blank" rel="noopener">&#128205; View Location Map</a>
     </div>
     <div class="bottom-photo" data-base="rotate(2deg)"><img src="pics/photo-06.jpg" alt="" loading="lazy"></div>
     <div class="bottom-photo mobile-photo" data-base="rotate(-1deg)"><img src="pics/photo-07.jpg" alt="" loading="lazy"></div>
