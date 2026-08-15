@@ -382,6 +382,30 @@
       filter: saturate(0.85) contrast(1.02);
     }
 
+    .bottom-details .bd-map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 16px;
+      padding: 10px 22px;
+      border: 1px solid rgba(188,201,176,0.4);
+      border-radius: 2px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #f2f5ee;
+      background: rgba(92,122,92,0.25);
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+
+    .bottom-details .bd-map-link:hover {
+      background: rgba(216,201,166,0.18);
+      border-color: #d8c9a6;
+      transform: translateY(-1px);
+    }
+
     .bottom-details .bd-swatches {
       display: flex;
       justify-content: center;
@@ -992,6 +1016,7 @@
       <div class="bd-map">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3854.6226705447166!2d120.9501724!3d14.9581011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33970100242db769%3A0xc0e32336ca6b1ee0!2sYsabel's%20Garden%20Private%20Resort!5e0!3m2!1sen!2sph!4v1786765189410!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
       </div>
+      <a class="bd-map-link" href="https://maps.app.goo.gl/fDdL6FG5JC8ZNBqU8" target="_blank" rel="noopener">&#128205; View Location Map</a>
     </div>
     <div class="bottom-photo" data-base="rotate(2deg)"><img src="pics/photo-06.jpg" alt="" loading="lazy"></div>
     <div class="bottom-photo mobile-photo" data-base="rotate(-1deg)"><img src="pics/photo-07.jpg" alt="" loading="lazy"></div>
