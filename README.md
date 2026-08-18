@@ -1,2 +1,2 @@
 # wedding-rsvp
-Mary &amp; Mel Wedding RSVP
+Mary &amp; Romel Wedding RSVP
