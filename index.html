@@ -424,6 +424,13 @@
       justify-items: center;
     }
 
+    .bottom-details .bd-swatch-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
     .bottom-details .bd-swatch {
       width: 24px;
       height: 24px;
@@ -431,6 +438,32 @@
       border: 1px solid rgba(188,201,176,0.45);
       box-shadow: 0 1px 4px rgba(0,0,0,0.3);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+    }
+
+    .bottom-details .bd-swatch:hover {
+      transform: scale(1.2);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .bottom-details .bd-swatch-label {
+      font-size: 0.55rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      color: rgba(242,245,238,0.8);
+      text-align: center;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .bottom-details .bd-swatch-wrap.active .bd-swatch-label {
+      opacity: 1;
+    }
+
+    .bottom-details .bd-swatch-wrap.active .bd-swatch {
+      transform: scale(1.15);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     }
 
     .bottom-details .bd-swatch:hover {
@@ -1006,14 +1039,14 @@
         <span class="bd-value">Semiformal</span>
         <span class="bd-swatch-note">Help us color our day by wearing shades of :</span>
         <div class="bd-swatches">
-          <span class="bd-swatch" style="background:#EADCC8" title="Beige"></span>
-          <span class="bd-swatch" style="background:#DDCBB6" title="Taupe"></span>
-          <span class="bd-swatch" style="background:#BFB0A0" title="Greige"></span>
-          <span class="bd-swatch" style="background:#A79B84" title="Cappuccino"></span>
-          <span class="bd-swatch" style="background:#B88E6D" title="Latte"></span>
-          <span class="bd-swatch" style="background:#9B6B4A" title="Sand"></span>
-          <span class="bd-swatch" style="background:#B07B55" title="Caramel"></span>
-          <span class="bd-swatch" style="background:#BBAA86" title="Champagne"></span>
+          <div class="bd-swatch-wrap"><span class="bd-swatch" style="background:#EADCC8" data-name="Beige"></span><span class="bd-swatch-label">Beige</span></div>
+          <div class="bd-swatch-wrap"><span class="bd-swatch" style="background:#DDCBB6" data-name="Taupe"></span><span class="bd-swatch-label">Taupe</span></div>
+          <div class="bd-swatch-wrap"><span class="bd-swatch" style="background:#BFB0A0" data-name="Greige"></span><span class="bd-swatch-label">Greige</span></div>
+          <div class="bd-swatch-wrap"><span class="bd-swatch" style="background:#A79B84" data-name="Cappuccino"></span><span class="bd-swatch-label">Cappuccino</span></div>
+          <div class="bd-swatch-wrap"><span class="bd-swatch" style="background:#B88E6D" data-name="Latte"></span><span class="bd-swatch-label">Latte</span></div>
+          <div class="bd-swatch-wrap"><span class="bd-swatch" style="background:#9B6B4A" data-name="Sand"></span><span class="bd-swatch-label">Sand</span></div>
+          <div class="bd-swatch-wrap"><span class="bd-swatch" style="background:#B07B55" data-name="Caramel"></span><span class="bd-swatch-label">Caramel</span></div>
+          <div class="bd-swatch-wrap"><span class="bd-swatch" style="background:#BBAA86" data-name="Champagne"></span><span class="bd-swatch-label">Champagne</span></div>
         </div>
       </div>
       <div class="bd-item">
@@ -1218,6 +1251,14 @@
   } else {
     revealEls.forEach(function(el) { el.classList.add('visible'); });
   }
+
+  document.querySelectorAll('.bd-swatch-wrap').forEach(function(wrap) {
+    wrap.addEventListener('click', function() {
+      var wasActive = this.classList.contains('active');
+      document.querySelectorAll('.bd-swatch-wrap.active').forEach(function(w) { w.classList.remove('active'); });
+      if (!wasActive) this.classList.add('active');
+    });
+  });
 </script>
 
 </body>
