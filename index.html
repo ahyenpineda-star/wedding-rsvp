@@ -1092,7 +1092,7 @@
   </div>
 </div>
 
-<audio id="bgMusic" src="music.webm" loop preload="auto" autoplay muted></audio>
+<audio id="bgMusic" src="music.webm" loop preload="auto"></audio>
 
 <button class="music-toggle" id="musicToggle" aria-label="Toggle music">&#9835;</button>
 
@@ -1206,7 +1206,6 @@
   }
 
   function playMusic() {
-    music.muted = false;
     if (!ctx) initAudio();
     if (music.readyState >= 3) {
       startPlayback();
@@ -1226,11 +1225,6 @@
     splash.classList.add('hidden');
     playMusic();
   });
-
-  setTimeout(() => {
-    splash.classList.add('hidden');
-    playMusic();
-  }, 100);
 
   toggle.addEventListener('click', (e) => {
     e.stopPropagation();
